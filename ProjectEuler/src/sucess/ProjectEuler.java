@@ -2,6 +2,7 @@ package sucess;
 
 import java.io.BufferedReader;
 
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-public class MaxProductMatrix {
+public class ProjectEuler {
 	
 	static long tMatrix[];
 	static int arr[][];
@@ -30,6 +31,31 @@ public class MaxProductMatrix {
 	static HashMap<String, Integer> alphabetMap; 
 	
 	public static void main(String[] args) throws IOException {
+		Scanner sc = new Scanner(System.in);
+
+//      Problem-01
+//		int t = sc.nextInt();
+//        while(t!=0){
+//            int n = sc.nextInt();
+//            System.out.println(sumOfDivisor(n-1,3)+sumOfDivisor(n-1,5)-sumOfDivisor(n-1,15));
+//            t--;
+//        }
+		
+		//Problem-02
+//		System.out.println(getFibonacciEvenSum(100));
+		
+		System.out.println(palindromicProduct(101110));
+		
+		
+		
+		//Problem-03
+		//Problem-04
+		//Problem-05
+		//Problem-06
+		//Problem-07
+		//Problem-08
+		//Problem-09
+		//Problem-10
 		
 //		BufferedReader buffer = new BufferedReader(new FileReader("C:\\Users\\dell\\Desktop\\input.txt"));
 		
@@ -69,12 +95,10 @@ public class MaxProductMatrix {
 //				System.out.println(key);
 //			}
 //		}
-		
+				
 //      Problem 29
 //		System.out.println(getDistinctPowers(100));
-		
-		System.out.println(digitPowers(5));
-				
+					
 //		double start = System.currentTimeMillis();
 //		countingSundays();
 //		double end = System.currentTimeMillis();
@@ -152,6 +176,86 @@ public class MaxProductMatrix {
 		
 	}
 	
+	//Problem-01
+	public static long sumOfDivisor(int target, int n) {
+		// Catch: Not to use Math.round() because if it is 8.8 it will be converted to 9 instead of 8 
+		int limit = (int)((target-1)/n);
+		long temp = n*(limit)*(limit+1);
+		temp = temp/2;
+		return temp;
+	}
+	
+	//Problem-02
+	public static long getFibonacciEvenSum(long n) {
+		int first = 0, second = 1, result = 0, sum = 0;
+		while(result<n) {
+			System.out.println(result);
+			result = (first+second);
+			if(result%2==0 && result<n) {
+				sum+=result;
+			}
+			first = second;
+			second = result;
+		}
+		return sum;
+	}
+	
+	//Problem-03
+	public static long getLargestPrime(long n) {
+		List<Long> primes = new ArrayList<>();
+		if(isPrime(n)) {
+			return n;
+		}
+		for(long i=2;i<=Math.sqrt(n);i++) {
+			if(n%i==0) {
+				if(isPrime(i)) {
+					primes.add(i);
+				}
+				if(isPrime((n/i))) {
+					primes.add(n/i);
+				}
+			}
+		}
+		return Collections.max(primes);
+	}
+	
+	public static boolean isPrime(long n) {
+		for(long i=2;i<=Math.sqrt(n);i++) {
+			if(n%i==0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	//Problem-04
+	public static int palindromicProduct(long limit) {
+		int ans = 0, result = 0;
+		StringBuffer s;
+		for(int i=100;i<=999;i++) {
+			for(int j=i;j<=999;j++) {
+				ans = j*i;
+				if(ans<=limit) {
+					s = new StringBuffer(String.valueOf(ans));
+					if(Integer.parseInt(s.reverse().toString()) == ans) {
+						if(ans>result) {
+//							System.out.println(ans);
+							result = ans;
+						}
+					}
+				}
+			}
+		}
+		return result;
+	}
+	
+	
+	//Problem-05
+	//Problem-06
+	//Problem-07
+	//Problem-08
+	//Problem-09
+	//Problem-10
 	
 	public static long digitPowers(int n) {
 		long countSum = 0;
@@ -529,9 +633,7 @@ public class MaxProductMatrix {
 			i--;
 		}
 	}
-	
-	
-	
+		
 	public static String getSumOfOneFiftyDigitNumber(String input) {
 		String sum = "";
 		long actualSum = 0;
